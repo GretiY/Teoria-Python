@@ -1,35 +1,21 @@
-#Ejercicio 18: 
-print("Introduzca una contraseña segura que : ")
-print("Minimo 8 chars\nAl menos una mayuscula\nAl menos un numero\Al menos un simbolo ( ! , @ , #, $, %)")
+texto = input("Introduce el texto: ")
+n = int(input("Desplazamiento: "))
+accion = input("¿Cifrar o descifrar? (c/d): ")
 
-contraseña = input()
-longitud_ok = len(contraseña) >=8
-tiene_mayuscula = False
-tiene_numero = False
-tiene_simbolo = False
-simbolos = ["!", "@","$","%"]
+if accion == "d":
+    n = -n          # ← descifrar es simplemente desplazar al revés
 
-for caracter in contraseña:
-    if caracter.isupper():
-        tiene_mayuscula = True
-       
-    if caracter.isdigit():
-        tiene_numero = True
-        
-    
-    if caracter in simbolos:
-        tiene_simbolo = True
-        
+resultado = ""
 
-print(f"Longitud ok : {longitud_ok}")
-print(f"Tiene mayuscula : {tiene_mayuscula}")
-print(f"Tiene numero : {tiene_numero}")
-print(f"Tiene simbolo : {tiene_simbolo}")
+for caracter in texto:
+    if caracter.isalpha():
+        if caracter.islower():
+            # cifra minúscula...
+            resultado += chr((ord(caracter) - ord("a") + n) % 26 + ord("a"))
+        else:
+            # cifra mayúscula... (mismo esquema pero con ord("A"))
+            resultado += chr((ord(caracter) - ord("A") + n) % 26 + ord("A"))
+    else:
+        resultado += caracter    # ← espacios y símbolos sin cambios
 
-
-es_valida = longitud_ok and tiene_mayuscula and tiene_numero and tiene_simbolo
-
-if es_valida:
-    print(f"la contraseña {contraseña} es valida")
-else:
-    print(f"contraseña no valida")
+print(resultado)

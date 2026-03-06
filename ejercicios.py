@@ -289,4 +289,45 @@ if es_valida:
 else:
     print(f"contraseña no valida")
 
+#Ejercicio 19: calculadora de estadisticas
 
+print("Introduce los digitos con los que quieras operar separados por comas : ")
+entrada = (input())
+numeros = [int(x) for x in entrada.split(",")]
+sumatoria = sum(numeros)
+minimo = min(numeros)
+mmaximo = max(numeros)
+orden = sorted(numeros)
+media = sumatoria / len(numeros)
+tres_mayores = orden[-3]
+
+print(f"la sumatoria es : {sumatoria}")
+print(f"el minimo es : {minimo}")
+print(f"el maximo es : {mmaximo}")
+print(f"la media es {media}")
+print(f"los mayores son: {tres_mayores}")
+
+#Ejercicio 20: cifrado Cesar
+# Conceptos: ord, chr, módulo %, iteración sobre strings
+# Implementa el cifrado César: desplaza cada letra del texto introducido por el usuario N posiciones en el alfabeto (N lo elige el usuario). Solo cifra letras, deja el resto igual. El programa también debe poder descifrar si el usuario lo pide.
+texto = input("Introduce el texto: ")
+n = int(input("Desplazamiento: "))
+accion = input("¿Cifrar o descifrar? (c/d): ")
+
+if accion == "d":
+    n = -n          # ← descifrar es simplemente desplazar al revés
+
+resultado = ""
+
+for caracter in texto:
+    if caracter.isalpha():
+        if caracter.islower():
+            # cifra minúscula...
+            resultado += chr((ord(caracter) - ord("a") + n) % 26 + ord("a"))
+        else:
+            # cifra mayúscula... (mismo esquema pero con ord("A"))
+            resultado += chr((ord(caracter) - ord("A") + n) % 26 + ord("A"))
+    else:
+        resultado += caracter    # ← espacios y símbolos sin cambios
+
+print(resultado)
